@@ -117,7 +117,6 @@ void stop() {
 //Ultrasonic distance measurement Sub function
 double getDistance() {
    a=sr04.Distance();
-  Serial.println(a);
   return a;
 }  
  
@@ -183,7 +182,7 @@ void loop() {
     }                     
 }
 
-void loop(){
+void autonome
   myservo.write(90);
   centerDistance = getDistance();
   stop();
@@ -222,10 +221,9 @@ void loop(){
         forward();
   }
 } 
+*/
 
-
-void loop(){
-  
+void autonomusMode(){
   centerDistance = getDistance();
   while (sr04.Distance() > limit_distance)
   {
@@ -260,12 +258,13 @@ void loop(){
     }
 }
 
-*/
+
 void loop(){
     myservo.write(90);
     if(hc06.available() >0){
     int value = hc06.read();
     Serial.println(value);
+    stop();
     switch (value){
       case 49:
         forward();
@@ -281,6 +280,9 @@ void loop(){
       break;
       case 53:
         sensorsMouvement();
+      break;
+      case 54:
+        autonomusMode();
       break;
       default:
       stop();
